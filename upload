@@ -4,7 +4,7 @@ userpass=$1
 fileordir=$2
 rdir=https://dav.jianguoyun.com/dav/jianguo/$3
 timestr=$(date -Iseconds)
-tmpdir=/tmp/jianguo$time
+tmpdir=/tmp/jianguo$timestr
 mkdir $tmpdir
 curl -u $1 --create-dirs $rdir
 if [-f "$fileordir" ]; then
