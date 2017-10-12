@@ -2,7 +2,7 @@
 
 userpass=$1
 fileordir=$2
-rdir=https://dav.jianguoyun.com/dav/jianguo/$3
+rdir=`https://dav.jianguoyun.com/dav/jianguo/$3`
 timestr=$(date -Iseconds)
 tmpdir=/tmp/jianguo$timestr
 mkdir $tmpdir
@@ -15,4 +15,6 @@ for s in $tmpdir/*
 do
  $0 $1 $s $3/$(basename $fileordir)
 done
+else 
+ echo `file or dir dose not exist"
 fi
