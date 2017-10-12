@@ -1,3 +1,13 @@
 #!/usr/bin/bash
 
- curl -u "$1:$2" -T $3 "https://dav.jianguoyun.com/dav/jianguo/"
+userpass=$1
+files=$2
+time=$(date -Iseconds)
+tmpdir=/tmp/jianguo$time
+mkdir $tmpdir
+cp $files/* $tmpdir/*
+
+for s in $tmpdir/*
+do
+ curl -u $1 -T $s "https://dav.jianguoyun.com/dav/jianguo/jianguo$time"
+done
