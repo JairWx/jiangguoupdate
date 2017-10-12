@@ -1,13 +1,21 @@
 #!/usr/bin/bash
 
 userpass=$1
-files=$2
-time=$(date -Iseconds)
+fileordir=$2
+timestr=$(date -Iseconds)
 tmpdir=/tmp/jianguo$time
 mkdir $tmpdir
+if [-f "$fileordir" ]; then
+filename=$(basename $fileordir)
+cp $fileordir $tmpdir/
+filepath=$tmpdir/$filename$timestr
+mv $tmpdir/$filename $filepath
+curl -u $1 -T $filepath "https://dav.jianguoyun.com/dav/jianguo/"
+else if [-d "$fileordir" ]; then
 cp $files/* $tmpdir/*
-
+curl -u $1 --create-dirs "https://dav.jianguoyun.com/dav/jianguo/jianguo$timestr"
 for s in $tmpdir/*
 do
- curl -u $1 -T $s "https://dav.jianguoyun.com/dav/jianguo/jianguo$time"
+ curl -u $1 -T $s "https://dav.jianguoyun.com/dav/jianguo/jianguo$timestr"
 done
+fi
