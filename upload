@@ -6,10 +6,9 @@ rdir="https://dav.jianguoyun.com/dav/jianguo/"
 timestr=$(date -Iseconds)
 tmpdir=/tmp/jianguo$timestr
 mkdir $tmpdir
-curl -u $1 --create-dirs $rdir
 if [-f "$fileordir" ]; then
 curl -u $1 -T $fileordir $rdir
-else if [-d "$fileordir" ]; then
+elif [-d "$fileordir" ]; then
 cp $files/* $tmpdir/*
 for s in $tmpdir/*
 do
