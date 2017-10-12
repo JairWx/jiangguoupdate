@@ -2,7 +2,7 @@
 
 userpass=$1
 fileordir=$2
-rdir=`https://dav.jianguoyun.com/dav/jianguo/$3`
+rdir="https://dav.jianguoyun.com/dav/jianguo/"
 timestr=$(date -Iseconds)
 tmpdir=/tmp/jianguo$timestr
 mkdir $tmpdir
@@ -13,7 +13,9 @@ else if [-d "$fileordir" ]; then
 cp $files/* $tmpdir/*
 for s in $tmpdir/*
 do
- $0 $1 $s $3/$(basename $fileordir)
+ if [-f "$fileordir" ]; then
+    curl $1 -T $s $rdir
+ fi
 done
 else 
  echo `file or dir dose not exist"
